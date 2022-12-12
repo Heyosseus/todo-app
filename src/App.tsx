@@ -1,20 +1,50 @@
-import "./App.css";
-import GlobalStyle from "./styles/global";
-import styled from "styled-components";
-import img from "./assets/card.png";
-import "./App.css";
-import Main from "./components/Main";
+import './App.css';
+import GlobalStyle from './styles/global';
+import styled from 'styled-components';
+import img from './assets/card.png';
+import './App.css';
+import Main from './components/Main';
+import { useState } from 'react';
+
+
+
 function App() {
+  const date = new Date();
+  const showTime = date.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+  const weekDays: string[] = [
+    'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thur',
+    'Fri',
+    'Sat',
+  ];
+  const week: number = date.getUTCDay();
+  const showDay: number = date.getUTCDate();
+
   return (
     <>
       <GlobalStyle />
       <Container>
         <Card>
           <Image>
-            <Weekday>Thu 9</Weekday>
-            <Time>5:23 AM</Time>
+            <Weekday style={{ paddingLeft: '8px', gap: '2px' }}>
+              {weekDays[week]}
+              {showDay}
+            </Weekday>
+            <Time style={{ left: 'auto' }}>{showTime}</Time>
           </Image>
-          <Main></Main>
+          <Main 
+            // input={input}
+            // setInput={setInput}
+            // todos={todos}
+            // setTodos={setTodos}
+          ></Main>
         </Card>
       </Container>
     </>
@@ -23,9 +53,7 @@ function App() {
 
 export default App;
 const Container = styled.div`
-  /* @media screen and (min-width: 700px) {
-    height: 400px;
-  } */
+  
 `;
 const Card = styled.div`
   background: #fff;
@@ -36,6 +64,7 @@ const Card = styled.div`
   border-radius: 10px 10px 0px 0px;
   @media screen and (min-width: 700px) {
     height: 600px;
+    
   }
 `;
 const Image = styled.div`
@@ -54,17 +83,16 @@ const Weekday = styled.div`
   margin-left: auto;
   margin-right: 28px;
   padding-top: 124px;
-  font-family: "Russo One", sans-serif;
+  font-family: 'Russo One', sans-serif;
 `;
 
 const Time = styled.div`
-  width: 192px;
+  width: 248px;
   height: 58px;
   line-height: 62px;
   color: #fff;
   font-size: 48px;
   margin-left: auto;
-  margin-right: 28px;
   margin-top: 8px;
-  font-family: "Russo One", sans-serif;
+  font-family: 'Russo One', sans-serif;
 `;
