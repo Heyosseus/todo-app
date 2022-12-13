@@ -1,41 +1,62 @@
-import styled from 'styled-components';
-import plus from '../assets/Vector.png';
-import completed from '../assets/completed.png';
-import React, { FC, useState } from 'react';
-import { ITodos } from '../Interfaces';
+import styled from "styled-components";
+import plus from "../assets/Vector.png";
+import completed from "../assets/completed.png";
+import React, { FC, useState } from "react";
+import trashIcon from "../assets/delete.png";
+import lineCircle from '../assets/line circle.png'
 
 const Main: React.FC<any> = () => {
-  const [input, setInput] = useState<string>('');
-  const [todos, setTodos] = useState<ITodos[]>([]);
-  const inputHandler = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    if(e.target.name === 'task'){
-    setInput(e.target.value);
-    }else{
-
-    }
+  const time = new Date();
+  const showTime = time.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+  const [inputText, setInputText] = useState<string>("");
+  const [todos, setTodos] = useState<any>([]);
+  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setInputText(e.target.value);
   };
 
   const submitHandler = (e: any): void => {
     e.preventDefault();
     console.log([...todos]);
-    const newTask = {text : input}
-    setTodos([...todos, newTask]);
-    setInput('');
+    if (todos !== "") {
+      setTodos([
+        ...todos,
+        { id: todos.length + 1, text: inputText.trim(), time: showTime },
+      ]);
+    }
+    setInputText("");
   };
+
+  const handleDelete = (id:any) => {
+    const removeItem = todos.filter((todo:any) => {
+      return todo.id !== id
+    })
+    setTodos(removeItem)
+  }
 
   return (
     <>
-    <Container>
-      <Circle>
-        <Completed></Completed>
-      </Circle>
-      <Input name='task' value={input} onChange={inputHandler}></Input>
-      <Button onClick={submitHandler}>
-        <Plus></Plus>
-      </Button>
-    </Container>
+      <Container>
+        <Input value={inputText} onChange={inputHandler}></Input>
+        <Button onClick={submitHandler}>
+          <Plus></Plus>
+        </Button>
+      </Container>
+      {todos.map((item: any) => (
+        <Todos key={item.id}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Heading>{item.text}</Heading>
+            <DateTime>{item.time}</DateTime>
+          </div>
+          <div style={{ display: "flex" }}>
+            <Circle></Circle>
+            <Delete onClick={()=>handleDelete(item.id)}></Delete>
+          </div>
+        </Todos>
+      ))}
     </>
   );
 };
@@ -50,17 +71,19 @@ const Container = styled.div`
   gap: 10px;
 `;
 const Input = styled.input.attrs({
-  type: 'text',
-  placeholder: 'Note',
+  type: "text",
+  placeholder: "Note",
 })`
   background: #ebeff2;
-  width: 250px;
+  width: 270px;
   height: 48px;
   border-radius: 5px;
   outline: none;
   border: none;
   font-size: 22px;
-  font-family: 'Inter', sans-serif;
+  margin-left: 6px;
+
+  font-family: "Inter", sans-serif;
   ::placeholder {
     width: 40px;
     height: 18px;
@@ -68,7 +91,7 @@ const Input = styled.input.attrs({
     color: #888888;
     line-height: 20px;
     padding-left: 12px;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
 `;
 const Button = styled.button`
@@ -86,15 +109,15 @@ const Button = styled.button`
   }
 `;
 const Circle = styled.div`
-  background: #20eeb0;
-  width: 24px;
-  height: 20px;
+  background: url(${lineCircle});
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 15px;
-  margin-left: 14px;
+  /* margin-top: 15px; */
+  margin-right: 14px;
 `;
 const Completed = styled.div`
   background: url(${completed});
@@ -111,4 +134,34 @@ const Plus = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
+`;
+
+const Delete = styled.div`
+  background: url(${trashIcon});
+  width: 22px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  &:hover{
+    cursor: pointer;
+  }
+`;
+
+const Todos = styled.div`
+  margin-left: 29px;
+  display: flex;
+  width: 365px;
+  justify-content: space-between;
+  margin-top: 12px;
+`;
+const Heading = styled.div`
+  color: #0d0d0d;
+  font-size: 18px;
+  text-transform: capitalize;
+  line-height: 21.78px;
+`;
+const DateTime = styled.div`
+  color: #888888;
+  font-size: 14px;
 `;
