@@ -21,7 +21,7 @@ function App() {
     <>
       <GlobalStyle />
       <Content>
-        <Style>Todo</Style>
+        <Style style={{display:'none'}}>Todo</Style>
 
         <Card>
           <Image>
@@ -59,7 +59,8 @@ const Card = styled.div`
   flex-direction: column;
   border-radius: 10px 10px 0px 0px;
   @media screen and (min-width: 700px) {
-    height: 600px;
+    height: 580px;
+    width: 620px;
   }
 `;
 const Image = styled.div`
@@ -67,6 +68,10 @@ const Image = styled.div`
   height: 202px;
   border-radius: 10px 10px 0px 0px;
   background: url(${img});
+  @media screen and (min-width: 700px) {
+    width: 620px;
+    background-size: cover;
+  }
 `;
 
 const Weekday = styled.div`
@@ -78,7 +83,12 @@ const Weekday = styled.div`
   margin-left: auto;
   margin-right: 28px;
   padding-top: 124px;
-  font-family: "Russo One", sans-serif;
+  font-family: 'Russo One', sans-serif;
+  @media screen and (min-width: 700px) {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 40px;
+  }
 `;
 
 const Time = styled.div`
@@ -89,7 +99,12 @@ const Time = styled.div`
   font-size: 48px;
   margin-left: auto;
   margin-top: 8px;
-  font-family: "Russo One", sans-serif;
+  font-family: 'Russo One', sans-serif;
+  @media screen and (min-width: 700px) {
+    display: flex;
+    justify-content: flex-end;
+    width: 300px;
+  }
 `;
 
 const Style = styled.div`
@@ -101,7 +116,7 @@ const Style = styled.div`
   /* margin-right: 220px; */
   visibility: hidden;
   @media screen and (min-width: 700px) {
-    visibility: visible;
+    visibility: hidden;
   }
 
 `;

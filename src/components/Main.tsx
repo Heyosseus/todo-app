@@ -13,7 +13,18 @@ const Main: React.FC<any> = () => {
     hour12: true,
   });
   const [inputText, setInputText] = useState<string>("");
-  const [todos, setTodos] = useState<any>([]);
+  const [todos, setTodos] = useState<any>([
+    {
+      text: 'Dinner with Anna',
+      id: 1,
+      time: showTime
+    },
+    {
+      text: 'Go to Gym',
+      id: 1,
+      time: showTime
+    }
+  ]);
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputText(e.target.value);
   };
@@ -69,10 +80,15 @@ const Container = styled.div`
   display: flex;
   margin: 26px;
   gap: 10px;
+  @media screen and (min-width: 700px) {
+    display: flex;
+    justify-content: flex-end;
+    width: 550px;
+  }
 `;
 const Input = styled.input.attrs({
-  type: "text",
-  placeholder: "Note",
+  type: 'text',
+  placeholder: 'Note',
 })`
   background: #ebeff2;
   width: 270px;
@@ -83,7 +99,7 @@ const Input = styled.input.attrs({
   font-size: 22px;
   margin-left: 6px;
 
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   ::placeholder {
     width: 40px;
     height: 18px;
@@ -91,7 +107,10 @@ const Input = styled.input.attrs({
     color: #888888;
     line-height: 20px;
     padding-left: 12px;
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
+  }
+  @media screen and (min-width: 700px) {
+    width: 600px;
   }
 `;
 const Button = styled.button`
@@ -153,7 +172,10 @@ const Todos = styled.div`
   display: flex;
   width: 365px;
   justify-content: space-between;
-  margin-top: 12px;
+  margin-top: 24px;
+  @media screen and (min-width: 700px) {
+    width: 550px;
+  }
 `;
 const Heading = styled.div`
   color: #0d0d0d;
