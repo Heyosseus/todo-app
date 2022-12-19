@@ -75,7 +75,7 @@ const Main: React.FC<any> = () => {
 export default Main;
 
 const Container = styled.div`
-  width: 375px;
+  width: 380px;
   height: 48px;
   display: flex;
   margin: 26px;
@@ -97,7 +97,7 @@ const Input = styled.input.attrs({
   outline: none;
   border: none;
   font-size: 22px;
-  margin-left: 6px;
+  margin-left: 16px;
 
   font-family: 'Inter', sans-serif;
   ::placeholder {
@@ -114,7 +114,7 @@ const Input = styled.input.attrs({
   }
 `;
 const Button = styled.button`
-  width: 88px;
+  width: 92px;
   height: 48px;
   background: #20eeb0;
   outline: none;
@@ -168,13 +168,13 @@ const Delete = styled.div`
 `;
 
 const Todos = styled.div`
-  margin-left: 29px;
+  margin-left: 42px;
   display: flex;
   width: 365px;
   justify-content: space-between;
   margin-top: 24px;
   @media screen and (min-width: 700px) {
-    width: 550px;
+    width: 535px;
   }
 `;
 const Heading = styled.div`

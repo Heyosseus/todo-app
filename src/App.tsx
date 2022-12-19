@@ -47,9 +47,7 @@ function App() {
 
 export default App;
 const Content = styled.div`
-@media screen and (min-width: 700px){
 
-}
 `;
 const Card = styled.div`
   background: #fff;
@@ -93,17 +91,18 @@ const Weekday = styled.div`
 
 const Time = styled.div`
   width: 220px;
-  height: 58px;
+  height: 68px;
   line-height: 62px;
   color: #fff;
   font-size: 48px;
-  margin-left: auto;
+  margin-left: 202px;
   margin-top: 8px;
   font-family: 'Russo One', sans-serif;
   @media screen and (min-width: 700px) {
     display: flex;
     justify-content: flex-end;
     width: 300px;
+    margin-left: 282px;
   }
 `;
 
